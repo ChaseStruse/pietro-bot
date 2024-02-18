@@ -22,14 +22,10 @@ def create_journal_entry(journal_entry: str, journal_date: str, username) -> Non
     :param journal_date:
     :return:
     """
-    data = {
-        journal_date: journal_entry
-    }
     journal_entry_from_user_entered_date, identifier = db.reference(f"/journal/{username}").get(journal_date)
-
-    if journal_entry_from_user_entered_date is not None:
-        db.reference(f"/journal/{username}").child(journal_date).update(data)
-    db.reference("/journal").child(username).set(data)
+    if journal_entry_from_user_entered_date.get(journal_date) is not None:
+        db.reference(f"/journal/{username}").child(journal_date).set(journal_entry)
+    db.reference(f"/journal").child(username).update({journal_date: journal_entry})
 
 
 def read_journal_entry(journal_date: str, username) -> str:
