@@ -1,12 +1,12 @@
 import os
-
 import discord
 from discord import Intents
 from discord.ext import commands
 from dotenv import load_dotenv
-
 from services.bot_service import sync_commands
 from src.services.gear_service import get_gear_score
+from src.services import journal_service
+
 
 intents = Intents.default()
 intents.message_content = True
@@ -35,6 +35,18 @@ async def gear_score(interaction: discord.Interaction, ap: int, awakening_ap: in
     """
     gs = get_gear_score(ap=ap, awakening_ap=awakening_ap, dp=dp)
     await interaction.response.send_message(f"Your gear score is {gs}", ephemeral=True)
+
+
+@bot.tree.command(name="create_journal_entry", description="Create a journal entry")
+async def create_journal_entry(interaction: discord.Interaction, journal_entry: str) -> None:
+    """
+    Place
+    :param interaction:
+    :param journal_entry:
+    :return:
+    """
+    journal_service.create_journal_entry(journal_entry=journal_entry)
+    await interaction.response.send_message(f"Journal has been set", ephemeral=True)
 
 
 @bot.event
