@@ -45,7 +45,8 @@ async def create_journal_entry(interaction: discord.Interaction, journal_entry: 
     :param journal_entry:
     :return:
     """
-    journal_service.create_journal_entry(journal_entry=journal_entry)
+    user = interaction.user.name
+    journal_service.create_journal_entry(journal_entry=journal_entry, username=user)
     await interaction.response.send_message(f"Journal has been set", ephemeral=True)
 
 
