@@ -47,7 +47,7 @@ async def create_journal_entry(interaction: discord.Interaction, journal_entry: 
 @bot.tree.command(name="read_journal_entry", description="Read a journal entry")
 async def read_journal_entry(interaction: discord.Interaction, year: int, month: int, day: int) -> None:
     """
-    Displays user's journal entry for entered date
+    Displays user's journal entry for entered date via discord slash command
     :param interaction: This is a discord message interaction
     :param year: integer, journal year
     :param month: integer, journal month
@@ -63,13 +63,13 @@ async def read_journal_entry(interaction: discord.Interaction, year: int, month:
 async def update_journal_entry(interaction: discord.Interaction, year: int, month: int, day: int,
                                updated_journal_entry: str) -> None:
     """
-    Place
-    :param interaction:
-    :param year:
-    :param month:
-    :param day:
-    :param updated_journal_entry:
-    :return:
+    User inputs data to update a journal entry via discord slash command
+    :param interaction: This is a discord message interaction
+    :param year: integer, journal year
+    :param month: integer, journal month
+    :param day: integer, journal day
+    :param updated_journal_entry: string, new journal entry
+    :return: None
     """
     user = interaction.user.name
     response = journal_service.update_journal_entry(year=year, month=month, day=day,
