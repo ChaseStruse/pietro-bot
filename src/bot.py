@@ -80,12 +80,12 @@ async def update_journal_entry(interaction: discord.Interaction, year: int, mont
 @bot.tree.command(name="delete_journal_entry", description="Delete a journal entry")
 async def delete_journal_entry(interaction: discord.Interaction, year: int, month: int, day: int) -> None:
     """
-    Place
-    :param interaction:
-    :param year:
-    :param month:
-    :param day:
-    :return:
+    User enters data to delete an existing journal entry via discord slash command
+    :param interaction: This is a discord message interaction
+    :param year: integer, journal year
+    :param month: integer, journal month
+    :param day: integer, journal day
+    :return: None
     """
     user = interaction.user.name
     response = journal_service.delete_journal_entry(year=year, month=month, day=day, username=user)

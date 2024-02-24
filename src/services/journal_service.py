@@ -51,14 +51,14 @@ def update_journal_entry(year: int, month: int, day: int, updated_journal_entry:
     return result
 
 
-def delete_journal_entry(year: int, month: int, day: int, username) -> str:
+def delete_journal_entry(year: int, month: int, day: int, username: str) -> str:
     """
-
-    :param year:
-    :param month:
-    :param day:
-    :param username:
-    :return:
+    Converts user inputted date integers into a date object, calls repository layer and deletes data
+    :param year: integer, journal year
+    :param month: integer, journal month
+    :param day: integer, journal day
+    :param username: string, user's discord username
+    :return: String
     """
     journal_date = date(year=year, month=month, day=day)
     result = journal_repository.delete_journal_entry(journal_date=str(journal_date), username=username)

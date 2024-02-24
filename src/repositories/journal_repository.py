@@ -63,17 +63,17 @@ def update_journal_entry(journal_date: str, updated_journal_entry: str, username
         return "No data found for that date, please try again"
 
 
-def delete_journal_entry(journal_date: str, username) -> str:
+def delete_journal_entry(journal_date: str, username: str) -> str:
     """
-
-    :param journal_date:
-    :param username:
-    :return:
+    Attempts to get user's existing journal entry, if entry exists deletes entry, else returns default statement
+    :param journal_date: string, journal entry date
+    :param username: string, user's discord username
+    :return: String
     """
     journal_entry_todays_date, identifier = db.reference(f"/journal/{username}").get(journal_date)
 
     if journal_entry_todays_date.get(journal_date) is not None:
         db.reference(f"/journal/{username}").child(journal_date).delete()
         return "Journal has been deleted"
-
-    return "No data found for that date, please try again"
+    else:
+        return "No data found for that date, please try again"
