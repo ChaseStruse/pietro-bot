@@ -14,18 +14,20 @@ firebase_admin.initialize_app(cred, {"databaseURL": os.getenv("DB_URL")})
 ref = db.reference("/")
 
 
-def create_journal_entry(journal_entry: str, journal_date: str, username) -> None:
+def create_journal_entry(journal_entry: str, journal_date: str, username: str) -> None:
     """
-
-    :param username:
-    :param journal_entry:
-    :param journal_date:
-    :return:
+    Attempts to get user's journal entry, if none, creates new entry, else updates existing entry
+    :param username: string, user's discord username
+    :param journal_entry: string, user's journal entry
+    :param journal_date: string, journal entry date
+    :return: None
     """
     journal_entry_from_user_entered_date, identifier = db.reference(f"/journal/{username}").get(journal_date)
+
     if journal_entry_from_user_entered_date.get(journal_date) is not None:
         db.reference(f"/journal/{username}").child(journal_date).set(journal_entry)
-    db.reference(f"/journal").child(username).update({journal_date: journal_entry})
+    else:
+        db.reference(f"/journal").child(username).update({journal_date: journal_entry})
 
 
 def read_journal_entry(journal_date: str, username) -> str:

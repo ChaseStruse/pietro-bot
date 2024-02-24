@@ -31,13 +31,13 @@ async def gear_score(interaction: discord.Interaction, ap: int, awakening_ap: in
 async def create_journal_entry(interaction: discord.Interaction, journal_entry: str,
                                year: int, month: int, day: int) -> None:
     """
-    Place
-    :param interaction:
-    :param journal_entry:
-    :param year:
-    :param month:
-    :param day:
-    :return:
+    User inputs data to create a journal entry via discord slash command
+    :param interaction: This is a discord message interaction
+    :param journal_entry: string, user's journal entry
+    :param year: integer, journal year
+    :param month: integer, journal month
+    :param day: integer, journal day
+    :return: None
     """
     user = interaction.user.name
     journal_service.create_journal_entry(journal_entry=journal_entry, year=year, month=month, day=day, username=user)
