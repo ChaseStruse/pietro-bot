@@ -30,18 +30,19 @@ def create_journal_entry(journal_entry: str, journal_date: str, username: str) -
         db.reference(f"/journal").child(username).update({journal_date: journal_entry})
 
 
-def read_journal_entry(journal_date: str, username) -> str:
+def read_journal_entry(journal_date: str, username: str) -> str:
     """
-
-    :param journal_date:
-    :param username:
-    :return:
+    Attempts to get user's existing journal entry, if entry exists returns entry, else returns default statement
+    :param journal_date: string, journal entry date
+    :param username: string, user's discord username
+    :return: String
     """
     journal_entry, identifier = db.reference(f"/journal/{username}").get(journal_date)
 
     if journal_entry.get(journal_date) is not None:
         return journal_entry[journal_date]
-    return "No journal found for given date"
+    else:
+        return "No journal found for given date"
 
 
 def update_journal_entry(journal_date: str, updated_journal_entry: str, username) -> str:

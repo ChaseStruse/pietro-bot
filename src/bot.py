@@ -47,12 +47,12 @@ async def create_journal_entry(interaction: discord.Interaction, journal_entry: 
 @bot.tree.command(name="read_journal_entry", description="Read a journal entry")
 async def read_journal_entry(interaction: discord.Interaction, year: int, month: int, day: int) -> None:
     """
-    Place
-    :param interaction:
-    :param year:
-    :param month:
-    :param day:
-    :return:
+    Displays user's journal entry for entered date
+    :param interaction: This is a discord message interaction
+    :param year: integer, journal year
+    :param month: integer, journal month
+    :param day: integer, journal day
+    :return: None
     """
     user = interaction.user.name
     journal = journal_service.read_journal_entry(year=year, month=month, day=day, username=user)
